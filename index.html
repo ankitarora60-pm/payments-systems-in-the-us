@@ -665,10 +665,12 @@ function showReport(){
   var fill=document.getElementById('ringFill');
   window.setTimeout(function(){fill.style.strokeDashoffset=408.4-(pct/100)*408.4;},200);
   var grade,msg,stars,color;
-  if(pct>=90){grade='Payments Expert! 🏆';msg='Outstanding — you have deep knowledge of U.S. Payment Systems.';stars='⭐⭐⭐⭐⭐';color='#059669';confetti();}
-  else if(pct>=75){grade='Strong Performance! 🎯';msg='Solid understanding! A few areas to polish up.';stars='⭐⭐⭐⭐';color='#2563eb';}
-  else if(pct>=60){grade='Good Foundation 📈';msg='Good start — review the sections below to strengthen your knowledge.';stars='⭐⭐⭐';color='#d97706';}
-  else{grade='Keep Learning! 💪';msg='Use the Knowledge Hub to study up — you\'ll get there!';stars='⭐⭐';color='#dc2626';}
+  if(pct>=90){grade='Payments Expert!';msg='Outstanding — you have deep knowledge of U.S. Payment Systems.';stars='⭐⭐⭐⭐⭐';color='#059669';confetti();}
+  else if(pct>=75){grade='Strong Performance!';msg='Solid understanding! A few areas to polish up.';stars='⭐⭐⭐⭐';color='#2563eb';}
+  else if(pct>=60){grade='Good Foundation';msg='Good start — review the sections below to strengthen your knowledge.';stars='⭐⭐⭐';color='#d97706';}
+  else if(pct>=40){grade='Keep Learning!';msg='Use the Knowledge Hub to study up — you\'ll get there!';stars='⭐⭐';color='#dc2626';}
+  else if(pct>0){grade='Keep Learning!';msg='Use the Knowledge Hub to study up — you\'ll get there!';stars='⭐';color='#dc2626';}
+  else{grade='Keep Learning!';msg='Use the Knowledge Hub to study up — you\'ll get there!';stars='';color='#dc2626';}
   fill.style.stroke=color;
   document.getElementById('scoreStars').textContent=stars;
   document.getElementById('scoreGrade').textContent=grade;
@@ -713,8 +715,8 @@ function shareResult(method){
   document.getElementById('shareNameInput').style.borderColor='';
   var total=currentQuestions.length;
   var pct=Math.round((score/total)*100);
-  var stars=pct>=90?'🏆':pct>=75?'🎯':pct>=60?'📈':'💪';
-  var text=stars+' '+name+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTest your own payments knowledge: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
+  var stars2=pct>=90?'⭐⭐⭐⭐⭐':pct>=75?'⭐⭐⭐⭐':pct>=60?'⭐⭐⭐':pct>=40?'⭐⭐':pct>0?'⭐':'';
+  var text=stars2+' '+name+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTest your own payments knowledge: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
   if(method==='copy'){
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(function(){
