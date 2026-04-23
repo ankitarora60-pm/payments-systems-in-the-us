@@ -236,7 +236,28 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .ppt-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 .ppt-btn svg{width:15px;height:15px}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+/* SHARE RESULT */
+.share-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:1.5rem;margin-bottom:1.2rem;text-align:center}
+.share-card h3{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.share-card p{font-size:.85rem;color:var(--muted);margin-bottom:1.1rem}
+.share-name-row{display:flex;gap:.65rem;max-width:420px;margin:0 auto 1rem}
+.share-name-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;
+  padding:.65rem 1rem;font-size:.92rem;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.share-name-input:focus{border-color:var(--accent)}
+.share-name-input::placeholder{color:var(--muted)}
+.share-score-pill{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;
+  padding:.65rem 1rem;font-size:.92rem;font-family:'DM Mono',monospace;color:var(--accent);
+  font-weight:700;white-space:nowrap;flex-shrink:0}
+.share-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.btn-share-copy{background:var(--accent);color:#fff}
+.btn-share-copy:hover{background:#1d4ed8}
+.btn-share-wa{background:#25d366;color:#fff}
+.btn-share-wa:hover{background:#1ebe5d}
+.btn-share-email{background:transparent;color:var(--text);border:1.5px solid var(--border)}
+.btn-share-email:hover{border-color:var(--accent);color:var(--accent)}
+.share-copied{font-size:.78rem;color:var(--accent3);margin-top:.6rem;display:none}
+.share-copied.show{display:block}
 .confetti-piece{position:fixed;width:9px;height:9px;border-radius:2px;
   animation:confetti-fall 3s ease-in forwards;z-index:9999;pointer-events:none}
 @keyframes confetti-fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
@@ -378,6 +399,20 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
       <h3>💡 Recommended Areas to Review</h3>
       <div id="reviewRecs" style="margin-top:.5rem;font-size:.88rem;line-height:1.7;color:var(--text)"></div>
     </div>
+    <!-- SHARE RESULT -->
+    <div class="share-card">
+      <h3>🎉 Share Your Result</h3>
+      <p>Enter your name and share your score with the team!</p>
+      <div class="share-name-row">
+        <input class="share-name-input" id="shareNameInput" type="text" placeholder="Your name…" maxlength="40"/>
+        <div class="share-score-pill" id="shareScorePill">0/36</div>
+      </div>
+      <div class="share-btns">
+        <button class="btn btn-share-copy" onclick="shareResult('copy')">📋 Copy Result</button>
+      </div>
+      <div class="share-copied" id="shareCopied">✅ Copied to clipboard!</div>
+    </div>
+
     <div class="replay-section">
       <button class="btn btn-primary" onclick="startQuiz('all')" style="margin-right:.6rem">🔄 Retake Quiz</button>
       <button class="btn btn-outline" onclick="showPage('hub')">📚 Study Knowledge Hub</button>
@@ -623,6 +658,10 @@ function showReport(){
   var pct=Math.round((score/total)*100);
   document.getElementById('scoreNum').textContent=score+'/'+total;
   document.getElementById('scorePct').textContent=pct+'%';
+  // Update share pill
+  document.getElementById('shareScorePill').textContent=score+'/'+total+' ('+pct+'%)';
+  document.getElementById('shareNameInput').value='';
+  document.getElementById('shareCopied').classList.remove('show');
   var fill=document.getElementById('ringFill');
   window.setTimeout(function(){fill.style.strokeDashoffset=408.4-(pct/100)*408.4;},200);
   var grade,msg,stars,color;
@@ -665,6 +704,34 @@ function confetti(){
     el.style.height=(Math.random()*7+4)+'px';
     document.body.appendChild(el);
     window.setTimeout(function(){if(el.parentNode)el.parentNode.removeChild(el);},3500);
+  }
+}
+
+function shareResult(method){
+  var name=document.getElementById('shareNameInput').value.trim();
+  if(!name){document.getElementById('shareNameInput').focus();document.getElementById('shareNameInput').style.borderColor='#dc2626';return;}
+  document.getElementById('shareNameInput').style.borderColor='';
+  var total=currentQuestions.length;
+  var pct=Math.round((score/total)*100);
+  var stars=pct>=90?'🏆':pct>=75?'🎯':pct>=60?'📈':'💪';
+  var text=stars+' '+name+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTest your own payments knowledge: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
+  if(method==='copy'){
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        document.getElementById('shareCopied').classList.add('show');
+        window.setTimeout(function(){document.getElementById('shareCopied').classList.remove('show');},3000);
+      });
+    }else{
+      var ta=document.createElement('textarea');
+      ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+      document.getElementById('shareCopied').classList.add('show');
+      window.setTimeout(function(){document.getElementById('shareCopied').classList.remove('show');},3000);
+    }
+  }else if(method==='whatsapp'){
+    window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+  }else if(method==='email'){
+    var subject='I scored '+score+'/'+total+' on the Payments Systems Quiz!';
+    window.location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
   }
 }
 
