@@ -7,13 +7,13 @@
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payments Systems in the US</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f6fb;--surface:#fff;--card:#fff;--card2:#eef1f8;--border:#d8dff0;
   --accent:#2563eb;--accent2:#d97706;--accent3:#059669;--accent4:#dc2626;--accent5:#7c3aed;
   --text:#1a2033;--muted:#64748b;--correct:#16a34a;--wrong:#dc2626}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 60% 40% at 10% 20%,rgba(37,99,235,.06),transparent 60%),
              radial-gradient(ellipse 50% 35% at 90% 80%,rgba(217,119,6,.05),transparent 60%)}
@@ -22,11 +22,11 @@ body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
 nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;
   justify-content:space-between;height:60px}
-.nav-brand{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--accent);display:flex;align-items:center;gap:.4rem}
+.nav-brand{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:600;color:var(--text);display:flex;align-items:center;gap:.4rem}
 .nav-brand span{color:var(--accent2)}
 .nav-tabs{display:flex;gap:.25rem}
 .nav-tab{padding:.45rem 1rem;border-radius:6px;font-size:.85rem;font-weight:500;cursor:pointer;
-  border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+  border:none;background:transparent;color:var(--muted);transition:all .2s;font-family:'Outfit',sans-serif}
 .nav-tab:hover{background:var(--card2);color:var(--text)}
 .nav-tab.active{background:var(--accent);color:#fff}
 .progress-pill{font-size:.78rem;font-family:'DM Mono',monospace;color:var(--accent3);
@@ -38,17 +38,17 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 
 /* HOME */
 .home-hero{max-width:780px;margin:0 auto;padding:4rem 2rem 2rem;text-align:center}
-.home-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:900;line-height:1.1;margin-bottom:.75rem}
+.home-title{font-family:'Outfit',sans-serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:600;letter-spacing:-.02em;line-height:1.1;margin-bottom:.75rem;color:var(--text)}
 .home-title .hl{color:var(--accent)}
 .home-title .hl2{color:var(--accent2)}
 .home-sub{color:var(--muted);font-size:1rem;line-height:1.7;max-width:540px;margin:0 auto 2rem}
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;max-width:780px;margin-left:auto;margin-right:auto;padding:0 2rem}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem .8rem;text-align:center}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700}
+.stat-num{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:600}
 .stat-lbl{font-size:.73rem;color:var(--muted);margin-top:.2rem}
 .cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2.5rem}
 .btn{padding:.7rem 1.6rem;border-radius:8px;font-size:.92rem;font-weight:600;cursor:pointer;
-  border:none;transition:all .2s;font-family:'DM Sans',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+  border:none;transition:all .2s;font-family:'Outfit',sans-serif;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover{background:#1d4ed8;transform:translateY(-1px)}
 .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}
@@ -63,14 +63,14 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .chapter-card-count{position:absolute;top:.75rem;right:.75rem;font-size:.72rem;
   font-family:'DM Mono',monospace;color:var(--muted);background:rgba(0,0,0,.06);padding:.15rem .5rem;border-radius:10px}
 .chapter-card-icon{font-size:1.7rem;margin-bottom:.5rem}
-.chapter-card-title{font-weight:700;font-size:.92rem;margin-bottom:.25rem}
+.chapter-card-title{font-weight:600;font-size:.92rem;margin-bottom:.25rem}
 .chapter-card-sub{color:var(--muted);font-size:.78rem;line-height:1.4}
 
 /* QUIZ */
 .quiz-wrap{max-width:720px;margin:0 auto;padding:2rem}
 .quiz-back{display:inline-flex;align-items:center;gap:.4rem;background:none;border:none;
   color:var(--muted);font-size:.85rem;font-weight:500;cursor:pointer;padding:.4rem .6rem;
-  border-radius:6px;margin-bottom:1.2rem;transition:all .15s;font-family:'DM Sans',sans-serif}
+  border-radius:6px;margin-bottom:1.2rem;transition:all .15s;font-family:'Outfit',sans-serif}
 .quiz-back:hover{background:var(--card2);color:var(--text)}
 .quiz-back svg{width:15px;height:15px}
 .quiz-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem}
@@ -98,7 +98,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .option.revealed{border-color:var(--correct);background:rgba(22,163,74,.05)}
 .option.locked{cursor:default}
 .opt-letter{width:24px;height:24px;flex-shrink:0;border-radius:6px;background:var(--border);
-  font-size:.78rem;font-weight:700;font-family:'DM Mono',monospace;display:flex;align-items:center;
+  font-size:.78rem;font-weight:600;font-family:'DM Mono',monospace;display:flex;align-items:center;
   justify-content:center;transition:all .18s;min-width:24px}
 .option.selected .opt-letter{background:var(--accent);color:#fff}
 .option.correct .opt-letter{background:var(--correct);color:#fff}
@@ -110,7 +110,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .feedback-box.wrong-fb{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2)}
 .feedback-box.reveal-fb{background:rgba(37,99,235,.06);border:1px solid rgba(37,99,235,.2)}
 .feedback-icon{font-size:1.2rem;margin-bottom:.3rem}
-.feedback-title{font-weight:700;margin-bottom:.25rem;font-size:.95rem}
+.feedback-title{font-weight:600;margin-bottom:.25rem;font-size:.95rem}
 .feedback-text{font-size:.88rem;line-height:1.6;color:var(--muted)}
 .feedback-text strong{color:var(--text)}
 .q-actions{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:.2rem}
@@ -119,12 +119,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .btn-check:disabled{background:var(--border);color:var(--muted);cursor:not-allowed}
 .btn-retry{background:rgba(217,119,6,.1);color:var(--accent2);border:1.5px solid rgba(217,119,6,.3)}
 .btn-retry:hover{background:rgba(217,119,6,.2)}
-.btn-next{background:var(--accent3);color:#fff;font-weight:700}
+.btn-next{background:var(--accent3);color:#fff;font-weight:600}
 .btn-next:hover{background:#047857}
 .btn-skip{background:transparent;color:var(--muted);border:1.5px solid var(--border)}
 .btn-skip:hover{border-color:var(--muted);color:var(--text)}
 
-/* REPORT */
+/* TIMER */
+.timer-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.timer-ring-wrap{position:relative;width:46px;height:46px;flex-shrink:0}
+.timer-ring-svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.timer-ring-bg{fill:none;stroke:var(--border);stroke-width:4}
+.timer-ring-fill{fill:none;stroke-width:4;stroke-linecap:round;transition:stroke-dasharray .9s linear}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:.85rem;font-weight:600;color:var(--text)}
+.timer-num.warn{color:#dc2626}
+.timer-bar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.timer-bar-fill{height:100%;border-radius:3px;background:var(--accent3);transition:width .9s linear}
+.timer-bar-fill.warn{background:#dc2626}
+.timer-label{font-size:.78rem;color:var(--muted);flex-shrink:0;font-family:'DM Mono',monospace}
 .report-wrap{max-width:780px;margin:0 auto;padding:2rem}
 .score-hero{text-align:center;padding:2.5rem 2rem;background:var(--card);border:1px solid var(--border);
   border-radius:20px;margin-bottom:1.5rem;position:relative;overflow:hidden}
@@ -134,9 +146,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .ring-svg{position:absolute;inset:0;transform:rotate(-90deg)}
 .ring-bg{fill:none;stroke:var(--border);stroke-width:10}
 .ring-fill{fill:none;stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset 1.2s ease}
-.score-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900}
+.score-num{font-family:'Outfit',sans-serif;font-size:2.5rem;font-weight:600}
 .score-pct{font-size:.85rem;color:var(--muted)}
-.score-grade{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:700;margin-bottom:.35rem}
+.score-grade{font-family:'Outfit',sans-serif;font-size:1.7rem;font-weight:600;margin-bottom:.35rem}
 .score-msg{color:var(--muted);font-size:.95rem}
 .score-stars{font-size:1.8rem;letter-spacing:.15rem;margin-bottom:.4rem}
 .report-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem}
@@ -150,21 +162,21 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .mistakes-list li{font-size:.83rem;padding:.45rem 0;border-bottom:1px solid var(--border);
   display:flex;align-items:flex-start;gap:.4rem;line-height:1.4}
 .mistakes-list li:last-child{border-bottom:none}
-.mistakes-list li::before{content:'✗';color:var(--wrong);flex-shrink:0;font-weight:700}
+.mistakes-list li::before{content:'✗';color:var(--wrong);flex-shrink:0;font-weight:600}
 .replay-section{text-align:center;padding:1.2rem}
 
 /* KNOWLEDGE HUB */
 .hub-wrap{max-width:1200px;margin:0 auto;padding:2rem}
 .hub-top{margin-bottom:1.4rem}
-.hub-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;margin-bottom:.3rem}
+.hub-title{font-family:'Outfit',sans-serif;font-size:1.9rem;font-weight:600;margin-bottom:.3rem}
 .hub-sub{color:var(--muted);font-size:.92rem}
 .search-bar{display:flex;gap:.65rem;margin-bottom:1.4rem}
 .search-input{flex:1;background:var(--card);border:1.5px solid var(--border);border-radius:10px;
-  padding:.75rem 1.1rem;font-size:.93rem;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+  padding:.75rem 1.1rem;font-size:.93rem;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s}
 .search-input:focus{border-color:var(--accent)}
 .search-input::placeholder{color:var(--muted)}
 .search-btn{background:var(--accent);color:#fff;padding:.75rem 1.3rem;border-radius:10px;
-  border:none;cursor:pointer;font-weight:600;font-size:.88rem;transition:background .2s;font-family:'DM Sans',sans-serif}
+  border:none;cursor:pointer;font-weight:600;font-size:.88rem;transition:background .2s;font-family:'Outfit',sans-serif}
 .search-btn:hover{background:#1d4ed8}
 .search-results{background:var(--card);border:1px solid var(--border);border-radius:12px;
   padding:1.1rem;margin-bottom:1.3rem;display:none}
@@ -179,7 +191,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .hub-layout{display:grid;grid-template-columns:255px 1fr;gap:1.4rem;align-items:start}
 .hub-sidebar{position:sticky;top:72px;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
 .hub-sidebar-header{padding:.8rem 1rem;background:var(--bg);border-bottom:1px solid var(--border);
-  font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .chapter-nav-item{display:flex;align-items:center;gap:.7rem;padding:.8rem 1rem;cursor:pointer;
   transition:all .15s;border-left:3px solid transparent;border-bottom:1px solid var(--border)}
 .chapter-nav-item:last-child{border-bottom:none}
@@ -195,24 +207,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .reader-empty-icon{font-size:2.8rem;margin-bottom:.9rem;opacity:.4}
 .reader-chapter-header{padding:1.6rem 1.8rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.9rem}
 .reader-chapter-icon{width:48px;height:48px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
-.reader-chapter-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;line-height:1.2}
+.reader-chapter-title{font-family:'Outfit',sans-serif;font-size:1.4rem;font-weight:600;line-height:1.2}
 .reader-chapter-sub{font-size:.82rem;color:var(--muted);margin-top:.15rem}
 .reader-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
 .reader-tabs::-webkit-scrollbar{display:none}
 .reader-tab{padding:.7rem 1.1rem;font-size:.8rem;font-weight:500;white-space:nowrap;cursor:pointer;
   border:none;background:transparent;color:var(--muted);border-bottom:2px solid transparent;
-  transition:all .15s;font-family:'DM Sans',sans-serif}
+  transition:all .15s;font-family:'Outfit',sans-serif}
 .reader-tab:hover{color:var(--text);background:var(--bg)}
 .reader-tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
 .reader-content{padding:1.8rem;max-height:calc(100vh - 260px);overflow-y:auto}
 .kb-section{margin-bottom:1.4rem}
-.kb-section h4{font-size:.97rem;font-weight:700;color:var(--accent2);margin-bottom:.75rem}
+.kb-section h4{font-size:.97rem;font-weight:600;color:var(--accent2);margin-bottom:.75rem}
 .kb-section p{font-size:.93rem;line-height:1.75;color:#374151;margin-bottom:.65rem}
 .kb-section ul{list-style:none;padding:0}
 .kb-section ul li{font-size:.91rem;line-height:1.6;padding:.3rem 0;color:#374151;padding-left:1.2rem;position:relative}
-.kb-section ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:700}
+.kb-section ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-weight:600}
 .kb-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.65rem}
-.kb-table th{background:#f0f4ff;color:var(--accent);font-weight:700;padding:.6rem .8rem;text-align:left;border:1px solid var(--border)}
+.kb-table th{background:#f0f4ff;color:var(--accent);font-weight:600;padding:.6rem .8rem;text-align:left;border:1px solid var(--border)}
 .kb-table td{padding:.55rem .8rem;border:1px solid var(--border);color:#374151;vertical-align:top;line-height:1.5}
 .kb-table tr:nth-child(even) td{background:rgba(0,0,0,.02)}
 .tag{display:inline-block;font-size:.73rem;font-weight:600;padding:.18rem .55rem;border-radius:5px;margin-right:.25rem;margin-bottom:.25rem}
@@ -239,16 +251,16 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 /* SHARE RESULT */
 .share-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
   padding:1.5rem;margin-bottom:1.2rem;text-align:center}
-.share-card h3{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.share-card h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
 .share-card p{font-size:.85rem;color:var(--muted);margin-bottom:1.1rem}
 .share-name-row{display:flex;gap:.65rem;max-width:420px;margin:0 auto 1rem}
 .share-name-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;
-  padding:.65rem 1rem;font-size:.92rem;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+  padding:.65rem 1rem;font-size:.92rem;color:var(--text);font-family:'Outfit',sans-serif;outline:none;transition:border-color .2s}
 .share-name-input:focus{border-color:var(--accent)}
 .share-name-input::placeholder{color:var(--muted)}
 .share-score-pill{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;
   padding:.65rem 1rem;font-size:.92rem;font-family:'DM Mono',monospace;color:var(--accent);
-  font-weight:700;white-space:nowrap;flex-shrink:0}
+  font-weight:600;white-space:nowrap;flex-shrink:0}
 .share-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
 .btn-share-copy{background:var(--accent);color:#fff}
 .btn-share-copy:hover{background:#1d4ed8}
@@ -278,7 +290,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 <body>
 
 <nav>
-  <div class="nav-brand">💳 Payments Systems <span>in the US</span></div>
+  <div class="nav-brand">💳 Payments Systems in the US</div>
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showPage('home')">🏠 Home</button>
     <button class="nav-tab" onclick="startQuiz('all')">🧠 Quiz</button>
@@ -290,7 +302,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 <!-- HOME -->
 <div class="page active" id="page-home">
   <div class="home-hero">
-    <h1 class="home-title">Test Your <span class="hl">Payments</span><br>Domain <span class="hl2">Knowledge</span></h1>
+    <h1 class="home-title">Test Your Payments<br>Domain Knowledge</h1>
     <p class="home-sub">A comprehensive quiz drawn from all 6 chapters — covering cash, checks, ACH, wires, cards, fraud, security, and user behaviour in U.S. payment systems.</p>
     <div class="cta-row">
       <button class="btn btn-primary" onclick="startQuiz('all')">🚀 Start Full Quiz (36 Qs)</button>
@@ -355,6 +367,17 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
       <span class="quiz-topic-badge" id="quizTopicBadge">Full Quiz</span>
       <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quizProgressFill" style="width:0%"></div></div>
       <span class="quiz-counter" id="quizCounter">1 / 36</span>
+    </div>
+    <div class="timer-row" id="timerRow">
+      <div class="timer-ring-wrap">
+        <svg class="timer-ring-svg" viewBox="0 0 46 46">
+          <circle class="timer-ring-bg" cx="23" cy="23" r="20"/>
+          <circle class="timer-ring-fill" id="timerRingFill" cx="23" cy="23" r="20" stroke="#059669" stroke-dasharray="125.7 125.7"/>
+        </svg>
+        <div class="timer-num" id="timerNum">45</div>
+      </div>
+      <div class="timer-bar-wrap"><div class="timer-bar-fill" id="timerBarFill" style="width:100%"></div></div>
+      <div class="timer-label" id="timerLabel">45s</div>
     </div>
     <div class="question-card" id="questionCard">
       <div class="q-meta"><div class="q-dot"></div><span id="qMeta"></span></div>
@@ -444,7 +467,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
       </div>
     </div>
     <div style="margin-top:2.5rem">
-      <h2 style="font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;margin-bottom:.35rem">📎 Source Presentations</h2>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:600;margin-bottom:.35rem">📎 Source Presentations</h2>
       <p style="color:var(--muted);font-size:.88rem;margin-bottom:1.1rem">The original slide decks. Download and open in PowerPoint or Google Slides.</p>
       <div class="ppt-grid">
         <div class="ppt-card">
@@ -534,6 +557,9 @@ var SESSION_GROUPS=[
 var currentQuestions=[],qi=0,selected=[],attempts=0,score=0,topicScores={},mistakes=[],locked=false;
 var topicColors=['#2563eb','#059669','#d97706','#dc2626','#7c3aed','#0891b2'];
 var topicNames=["Payments Overview","ACH Systems","Card Payments","Cash Payments","Payment Users","System User Perspectives"];
+var TIMER_SECS=45;
+var timerInterval=null,timerLeft=0;
+var SHEETS_URL='https://script.google.com/macros/s/AKfycbwYxD95tUCn-3Y99DJQQ_JKaGLph-QUfT_NQpY6LjfHY6KYE92LSvchpVcy4IrhgaXu/exec';
 
 function startQuiz(mode){
   currentQuestions=(mode==='all')?shuffle(ALL_QUESTIONS.slice()):shuffle(SESSION_GROUPS[mode].slice());
@@ -550,6 +576,56 @@ function startQuiz(mode){
 function shuffle(arr){
   for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=arr[i];arr[i]=arr[j];arr[j]=tmp;}
   return arr;
+}
+
+function startTimer(){
+  stopTimer();
+  timerLeft=TIMER_SECS;
+  updateTimerUI(timerLeft);
+  timerInterval=window.setInterval(function(){
+    timerLeft--;
+    updateTimerUI(timerLeft);
+    if(timerLeft<=0){stopTimer();timerExpired();}
+  },1000);
+}
+
+function stopTimer(){
+  if(timerInterval){window.clearInterval(timerInterval);timerInterval=null;}
+}
+
+function updateTimerUI(t){
+  var pct=t/TIMER_SECS;
+  var circumference=125.7;
+  var dash=circumference*pct;
+  var fill=document.getElementById('timerRingFill');
+  var num=document.getElementById('timerNum');
+  var bar=document.getElementById('timerBarFill');
+  var label=document.getElementById('timerLabel');
+  if(!fill)return;
+  fill.style.strokeDasharray=dash+' '+circumference;
+  fill.style.stroke=t<=10?'#dc2626':t<=20?'#d97706':'#059669';
+  num.textContent=t;
+  num.className='timer-num'+(t<=10?' warn':'');
+  bar.style.width=(pct*100)+'%';
+  bar.className='timer-bar-fill'+(t<=10?' warn':'');
+  label.textContent=t+'s';
+}
+
+function timerExpired(){
+  if(locked)return;
+  locked=true;
+  var q=currentQuestions[qi];
+  mistakes.push(q.q.substring(0,65)+'… (time up)');
+  document.querySelectorAll('.option').forEach(function(o){o.classList.add('locked');});
+  document.getElementById('btnCheck').style.display='none';
+  document.getElementById('btnRetry').style.display='none';
+  document.getElementById('btnSkip').style.display='none';
+  q.c.forEach(function(i){
+    var opts=document.querySelectorAll('.option');
+    opts[i].classList.add('revealed');
+  });
+  showFeedback('reveal-fb','⏱️','Time\'s up!','<strong>Explanation:</strong> '+q.e);
+  document.getElementById('btnNext').style.display='inline-flex';
 }
 
 function renderQuestion(){
@@ -583,6 +659,7 @@ function renderQuestion(){
     el.onclick=function(){toggleOption(i,el,q.m);};
     container.appendChild(el);
   });
+  startTimer();
 }
 
 function toggleOption(idx,el,multi){
@@ -598,6 +675,7 @@ function toggleOption(idx,el,multi){
 
 function checkAnswer(){
   if(selected.length===0){showFeedback('reveal-fb','⚠️','Select an answer first','Click one or more options before checking.');return;}
+  stopTimer();
   var q=currentQuestions[qi];
   var sa=selected.slice().sort();
   var ca=q.c.slice().sort();
@@ -640,8 +718,8 @@ function retryAnswer(){
   selected=[];
 }
 
-function nextQuestion(){qi++;if(qi>=currentQuestions.length){showReport();return;}renderQuestion();}
-function skipQuestion(){if(currentQuestions[qi])mistakes.push(currentQuestions[qi].q.substring(0,65)+'… (skipped)');nextQuestion();}
+function nextQuestion(){stopTimer();qi++;if(qi>=currentQuestions.length){showReport();return;}renderQuestion();}
+function skipQuestion(){stopTimer();if(currentQuestions[qi])mistakes.push(currentQuestions[qi].q.substring(0,65)+'… (skipped)');nextQuestion();}
 
 function showFeedback(cls,icon,title,text){
   var fb=document.getElementById('feedbackBox');
@@ -717,6 +795,10 @@ function shareResult(method){
   var pct=Math.round((score/total)*100);
   var stars2=pct>=90?'⭐⭐⭐⭐⭐':pct>=75?'⭐⭐⭐⭐':pct>=60?'⭐⭐⭐':pct>=40?'⭐⭐':pct>0?'⭐':'';
   var text=stars2+' '+name+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTest your own payments knowledge: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
+  // Log to Google Sheets
+  try{
+    fetch(SHEETS_URL,{method:'POST',body:JSON.stringify({name:name,score:score,total:total,pct:pct}),headers:{'Content-Type':'application/json'}});
+  }catch(e){}
   if(method==='copy'){
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(text).then(function(){
@@ -866,6 +948,7 @@ function searchKnowledge(query){
 function openModule(id){showPage('hub');window.setTimeout(function(){openChapter(id);},60);document.getElementById('searchResults').classList.remove('show');}
 
 function showPage(name){
+  if(name!=='quiz'){stopTimer();}
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active');});
   document.getElementById('page-'+name).classList.add('active');
