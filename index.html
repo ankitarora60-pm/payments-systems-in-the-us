@@ -248,7 +248,23 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
 .ppt-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 .ppt-btn svg{width:15px;height:15px}
 
-/* SHARE RESULT */
+/* NAME MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.hidden{display:none}
+.modal-box{background:var(--card);border-radius:18px;padding:2.2rem;max-width:420px;
+  width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.modal-icon{font-size:2.5rem;margin-bottom:.75rem}
+.modal-title{font-family:'Outfit',sans-serif;font-size:1.35rem;font-weight:600;
+  margin-bottom:.4rem;color:var(--text)}
+.modal-sub{color:var(--muted);font-size:.88rem;margin-bottom:1.3rem;line-height:1.5}
+.modal-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;
+  padding:.8rem 1.1rem;font-size:1rem;color:var(--text);font-family:'Outfit',sans-serif;
+  outline:none;transition:border-color .2s;margin-bottom:1rem;text-align:center}
+.modal-input:focus{border-color:var(--accent)}
+.modal-input::placeholder{color:var(--muted)}
+.modal-error{color:#dc2626;font-size:.8rem;margin-top:-.6rem;margin-bottom:.8rem;display:none}
+.modal-error.show{display:block}
 .share-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
   padding:1.5rem;margin-bottom:1.2rem;text-align:center}
 .share-card h3{font-size:1rem;font-weight:600;margin-bottom:.3rem}
@@ -298,6 +314,19 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
   </div>
   <div class="progress-pill" id="progressPill">Q1/36</div>
 </nav>
+
+<!-- NAME MODAL -->
+<div class="modal-overlay hidden" id="nameModal">
+  <div class="modal-box">
+    <div class="modal-icon">👋</div>
+    <div class="modal-title">Before you begin</div>
+    <div class="modal-sub">Enter your name so your score can be recorded for the team.</div>
+    <input class="modal-input" id="modalNameInput" type="text" placeholder="Your full name…" maxlength="50"
+      onkeydown="if(event.key==='Enter')confirmName()"/>
+    <div class="modal-error" id="modalError">Please enter your name to continue.</div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="confirmName()">Let's Go →</button>
+  </div>
+</div>
 
 <!-- HOME -->
 <div class="page active" id="page-home">
@@ -424,14 +453,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-
     </div>
     <!-- SHARE RESULT -->
     <div class="share-card">
-      <h3>🎉 Share Your Result</h3>
-      <p>Enter your name and share your score with the team!</p>
+      <h3>📤 Share Result</h3>
+      <p id="shareSubmitMsg" style="color:var(--accent3);font-size:.85rem;margin-bottom:.8rem">✅ Your score has been recorded automatically.</p>
       <div class="share-name-row">
-        <input class="share-name-input" id="shareNameInput" type="text" placeholder="Your name…" maxlength="40"/>
-        <div class="share-score-pill" id="shareScorePill">0/36</div>
+        <div class="share-score-pill" id="shareScorePill" style="flex:1;text-align:center">0/36</div>
       </div>
-      <div class="share-btns">
-        <button class="btn btn-share-copy" onclick="shareResult('copy')">📋 Copy Result</button>
+      <div class="share-btns" style="margin-top:.8rem">
+        <button class="btn btn-share-copy" onclick="copyResult()">📋 Share Result</button>
       </div>
       <div class="share-copied" id="shareCopied">✅ Copied to clipboard!</div>
     </div>
@@ -560,8 +588,27 @@ var topicNames=["Payments Overview","ACH Systems","Card Payments","Cash Payments
 var TIMER_SECS=45;
 var timerInterval=null,timerLeft=0;
 var SHEETS_URL='https://script.google.com/macros/s/AKfycbwYxD95tUCn-3Y99DJQQ_JKaGLph-QUfT_NQpY6LjfHY6KYE92LSvchpVcy4IrhgaXu/exec';
+var userName='';
+var pendingMode=null;
 
 function startQuiz(mode){
+  pendingMode=mode;
+  // Show name modal
+  document.getElementById('nameModal').classList.remove('hidden');
+  document.getElementById('modalNameInput').value='';
+  document.getElementById('modalError').classList.remove('show');
+  window.setTimeout(function(){document.getElementById('modalNameInput').focus();},100);
+}
+
+function confirmName(){
+  var name=document.getElementById('modalNameInput').value.trim();
+  if(!name){document.getElementById('modalError').classList.add('show');return;}
+  userName=name;
+  document.getElementById('nameModal').classList.add('hidden');
+  _startQuiz(pendingMode);
+}
+
+function _startQuiz(mode){
   currentQuestions=(mode==='all')?shuffle(ALL_QUESTIONS.slice()):shuffle(SESSION_GROUPS[mode].slice());
   if(!currentQuestions||currentQuestions.length===0){alert('No questions found. Please try the Full Quiz.');return;}
   qi=0;score=0;attempts=0;topicScores={};mistakes=[];
@@ -736,10 +783,12 @@ function showReport(){
   var pct=Math.round((score/total)*100);
   document.getElementById('scoreNum').textContent=score+'/'+total;
   document.getElementById('scorePct').textContent=pct+'%';
-  // Update share pill
-  document.getElementById('shareScorePill').textContent=score+'/'+total+' ('+pct+'%)';
-  document.getElementById('shareNameInput').value='';
+  document.getElementById('shareScorePill').textContent=userName+' · '+score+'/'+total+' ('+pct+'%)';
   document.getElementById('shareCopied').classList.remove('show');
+  // Auto-submit to Google Sheets
+  try{
+    fetch(SHEETS_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({name:userName,score:score,total:total,pct:pct}),headers:{'Content-Type':'application/json'}});
+  }catch(e){console.log('Sheets error:',e);}
   var fill=document.getElementById('ringFill');
   window.setTimeout(function(){fill.style.strokeDashoffset=408.4-(pct/100)*408.4;},200);
   var grade,msg,stars,color;
@@ -787,35 +836,21 @@ function confetti(){
   }
 }
 
-function shareResult(method){
-  var name=document.getElementById('shareNameInput').value.trim();
-  if(!name){document.getElementById('shareNameInput').focus();document.getElementById('shareNameInput').style.borderColor='#dc2626';return;}
-  document.getElementById('shareNameInput').style.borderColor='';
+function copyResult(){
   var total=currentQuestions.length;
   var pct=Math.round((score/total)*100);
-  var stars2=pct>=90?'⭐⭐⭐⭐⭐':pct>=75?'⭐⭐⭐⭐':pct>=60?'⭐⭐⭐':pct>=40?'⭐⭐':pct>0?'⭐':'';
-  var text=stars2+' '+name+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTest your own payments knowledge: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
-  // Log to Google Sheets
-  try{
-    fetch(SHEETS_URL,{method:'POST',body:JSON.stringify({name:name,score:score,total:total,pct:pct}),headers:{'Content-Type':'application/json'}});
-  }catch(e){}
-  if(method==='copy'){
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(text).then(function(){
-        document.getElementById('shareCopied').classList.add('show');
-        window.setTimeout(function(){document.getElementById('shareCopied').classList.remove('show');},3000);
-      });
-    }else{
-      var ta=document.createElement('textarea');
-      ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+  var stars=pct>=90?'⭐⭐⭐⭐⭐':pct>=75?'⭐⭐⭐⭐':pct>=60?'⭐⭐⭐':pct>=40?'⭐⭐':pct>0?'⭐':'';
+  var text=stars+' '+userName+' scored '+score+'/'+total+' ('+pct+'%) on the Payments Systems in the US Quiz!\n\nTake the quiz: https://ankitarora60-pm.github.io/payments-systems-in-the-us';
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(function(){
       document.getElementById('shareCopied').classList.add('show');
       window.setTimeout(function(){document.getElementById('shareCopied').classList.remove('show');},3000);
-    }
-  }else if(method==='whatsapp'){
-    window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
-  }else if(method==='email'){
-    var subject='I scored '+score+'/'+total+' on the Payments Systems Quiz!';
-    window.location.href='mailto:?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
+    });
+  }else{
+    var ta=document.createElement('textarea');
+    ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    document.getElementById('shareCopied').classList.add('show');
+    window.setTimeout(function(){document.getElementById('shareCopied').classList.remove('show');},3000);
   }
 }
 
